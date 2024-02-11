@@ -1,9 +1,11 @@
 using Domain.Contracts.Business;
 using Domain.Dto;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Services.Business.DependencyInjection")]
+
 namespace Services.Business.Processor;
 
-public class SimpleProcessor : IMeasurementProcessor
+internal class LineByLineSpanSimpleProcessor : IMeasurementProcessor
 {
     public IDictionary<string, Measurement> Process(IEnumerable<string> measurements)
     {

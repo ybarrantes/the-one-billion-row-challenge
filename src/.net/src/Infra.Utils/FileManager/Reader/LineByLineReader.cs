@@ -1,9 +1,11 @@
-using Domain.Contracts.Utils;
+using Domain.Contracts.Utils.FileManager.Reader;
 using FileNotFoundException = Infra.Utils.FileManager.Exceptions.FileNotFoundException;
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Infra.Utils.DependencyInjection")]
 
 namespace Infra.Utils.FileManager.Reader;
 
-public class LineByLineSyncReader : ISyncReader
+internal class LineByLineReader : IReader
 {
     /// <summary>
     /// Reads a file line by line.
@@ -16,5 +18,11 @@ public class LineByLineSyncReader : ISyncReader
     {
         FileNotFoundException.ThrowIfFileNotFound(path);
         return File.ReadLines(path);
+    }
+
+    public IAsyncEnumerable<string> ReadAsync(string path)
+    {
+        FileNotFoundException.ThrowIfFileNotFound(path);
+        return File.ReadLinesAsync(path);
     }
 }

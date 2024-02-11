@@ -1,4 +1,4 @@
-namespace Domain.Contracts.Utils;
+namespace Domain.Contracts.Utils.FileManager.Reader;
 
 public interface ISyncReader
 {

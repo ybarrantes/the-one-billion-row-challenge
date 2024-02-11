@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Services.Business\Services.Business.csproj" />
+      <ProjectReference Include="..\..\Infra.Utils.DependencyInjection\Infra.Utils.DependencyInjection.csproj" />
+      <ProjectReference Include="..\..\Services.Business.DependencyInjection\Services.Business.DependencyInjection.csproj" />
       <ProjectReference Include="..\Domain.Contracts\Domain.Contracts.csproj" />
       <ProjectReference Include="..\Infra.Utils\Infra.Utils.csproj" />
     </ItemGroup>

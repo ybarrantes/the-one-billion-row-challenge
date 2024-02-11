@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Utils.FileManager.Exceptions;
 
-public class FileNotFoundException : System.IO.FileNotFoundException
+internal class FileNotFoundException : System.IO.FileNotFoundException
 {
     private FileNotFoundException(string message) : base(message)
     {

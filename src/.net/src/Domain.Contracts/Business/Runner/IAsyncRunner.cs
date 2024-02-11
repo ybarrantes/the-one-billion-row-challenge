@@ -1,4 +1,4 @@
-namespace Domain.Contracts.Business;
+namespace Domain.Contracts.Business.Runner;
 
 public interface IAsyncRunner
 {
