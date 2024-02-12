@@ -1,4 +1,6 @@
+using Domain.Shared.Types;
 using Infra.Utils.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Business.DependencyInjection;
 
@@ -12,9 +14,19 @@ public static class HostBuilder
             .ConfigureServices((hostContext, services) =>
             {
                 services
-                    .AddProcessorAsLineByLineString()
+                    .AddProcessorServices()
                     .AddInfraUtilsServices();
             })
             .Build();
+    }
+    
+    public static IRunner? ResolveRunner(this IHost host, RunnerType runnerType)
+    {
+        return runnerType switch
+        {
+            RunnerType.LineByLineSpan => host.Services.GetKeyedService<IRunner>(nameof(RunnerType.LineByLineSpan)),
+            RunnerType.LineByLineString => host.Services.GetKeyedService<IRunner>(nameof(RunnerType.LineByLineString)),
+            _ => throw new ArgumentOutOfRangeException(nameof(runnerType), runnerType, null)
+        };
     }
 }

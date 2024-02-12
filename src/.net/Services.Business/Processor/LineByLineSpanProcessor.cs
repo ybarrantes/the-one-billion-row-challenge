@@ -1,10 +1,11 @@
 using Domain.Contracts.Business;
 using Domain.Dto;
-using Domain.Shared;
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Services.Business.DependencyInjection")]
 
 namespace Services.Business.Processor;
 
-internal class LineByLineStringSimpleProcessor : IMeasurementProcessor
+internal class LineByLineSpanProcessor : IMeasurementProcessor
 {
     public IDictionary<string, Measurement> Process(IEnumerable<string> measurements)
     {
@@ -18,18 +19,18 @@ internal class LineByLineStringSimpleProcessor : IMeasurementProcessor
         return measurementsResult;
     }
     
-    private static void UpdateMeasurement(Dictionary<string, Measurement> measurements, string input)
+    private static void UpdateMeasurement(Dictionary<string, Measurement> measurements, ReadOnlySpan<char> input)
     {
-        var data = input.Split(Constants.MeasurementSeparator);
+        var index = input.IndexOf(';');
         
-        if (data.Length != 2)
+        if (index == -1)
         {
             return;
         }
         
-        var city = data[0];
+        var city = input[..index].ToString();
         
-        var temp = data[1];
+        var temp = input[(index + 1)..];
         if (!decimal.TryParse(temp, out var tempValue))
         {
             return;

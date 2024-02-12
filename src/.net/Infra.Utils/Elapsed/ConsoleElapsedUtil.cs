@@ -3,7 +3,7 @@ using Domain.Contracts.Utils.Elapsed;
 
 namespace Infra.Utils.Elapsed;
 
-internal class ElapsedUtil : IElapsed
+internal class ConsoleElapsedUtil : IElapsed
 {
     public void LogElapsed(Action action, string message = "")
     {
