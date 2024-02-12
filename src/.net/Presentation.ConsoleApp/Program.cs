@@ -12,7 +12,6 @@ var host = HostBuilder.CreateHost(args);
 var app = new App(host);
 app.Run(inputFilePath, outputFilePath);
 
-
 // Benchmark
 //BenchmarkRunner.Run<AppBenchmark>();
 
